@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>M.N.K- Create a new account</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle">
+        <span id="themeIcon">🌙</span>
+    </button>
+
+    <div id="login-page-content">
+        <div class="page-wrapper">
+            <div class="text-section">
+                <div class="facebook-logo">M.N.K</div>
+                <h2 class="tagline">
+                    M.N.K helps you connect and share with the people in your life.
+                </h2>
+            </div>
+
+            <div class="form-section">
+                <div class="form-card">
+                    <form id="loginForm" onsubmit="login(event)">
+                        <input type="email" name="email" id="loginEmail" placeholder="Email address or phone number"
+                            required />
+                        <input type="password" name="password" id="loginPassword" placeholder="Password" required />
+                        <button type="submit" class="login-btn">Log In</button>
+                    </form>
+                    <p id="loginMessage"></p>
+
+                    <a href="#" class="forgot-password">Forgotten password?</a>
+
+                    <div class="separator"></div>
+
+                    <button class="create-btn" onclick="goToSignupPage()">Create new account</button>
+                </div>
+
+                <div class="create-page-link">
+                    <a href="#">Create a Page</a> for a celebrity, brand or business.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Page -->
+    <div id="signup-page-content" class="flex flex-col" style="display: none;">
+        <div class="signup-form-container mt-10">
+
+            <div id="facebook-logo">
+                <div class="facebook-logo-signup">M.N.K</div>
+            </div>
+            <div class="signup-card-header">
+                <h2>Create a new account</h2>
+                <p>It's quick and easy.</p>
+            </div>
+
+            <form id="signupForm" onsubmit="signupDetails(event)">
+                <div class="signup-form-body">
+                    <div class="name-fields">
+                        <input type="text" id="firstName" name="firstName" placeholder="First name" required />
+                        <input type="text" id="sureName" name="surname" placeholder="Surname" required />
+                    </div>
+
+                    <div class="label-text">
+                        Date of birth <a href="#"
+                            style="color: var(--text-secondary); font-weight: normal; margin-left: 5px;">&#x24D8;</a>
+                    </div>
+
+                    <div class="dropdown-fields">
+                        <select id="selectDay" class="gender-box" name="day" required>
+                            <option value="" disabled selected>Day</option>
+                        </select>
+                        <select class="gender-box" name="month" required>
+                            <option value="" disabled selected>Month</option>
+                            <option value="1">Jan</option>
+                            <option value="2">Feb</option>
+                            <option value="3">Mar</option>
+                            <option value="4">Apr</option>
+                            <option value="5">May</option>
+                            <option value="6">Jun</option>
+                            <option value="7">Jul</option>
+                            <option value="8">Aug</option>
+                            <option value="9">Sep</option>
+                            <option value="10">Oct</option>
+                            <option value="11">Nov</option>
+                            <option value="12">Dec</option>
+                        </select>
+                        <select id="yearSelect" class="gender-box" name="year" required>
+                            <option value="" disabled selected>Year</option>
+                        </select>
+                    </div>
+
+                    <div class="label-text">
+                        Gender <a href="#" style="color: var(--text-secondary); font-weight: normal; margin-left: 5px;">&#x24D8;</a>
+                    </div>
+                    <div class="gender-options">
+                        <div class="gender-box">
+                            <label for="female">Female</label>
+                            <input type="radio" id="female" name="gender" value="Female" />
+                        </div>
+                        <div class="gender-box">
+                            <label for="male">Male</label>
+                            <input type="radio" id="male" name="gender" value="Male" />
+                        </div>
+                        <div class="gender-box">
+                            <label for="custom">Custom</label>
+                            <input type="radio" id="custom" name="gender" value="Custom" />
+                        </div>
+                    </div>
+
+                    <div class="signup-email-password">
+                        <div class="signup-email">
+                            <input id="email" type="email" name="mobileOrEmail"
+                                placeholder="Mobile number or email address" required />
+                        </div>
+                        <div class="signup-password">
+                            <input id="password" type="password" name="newPassword" placeholder="New password"
+                                required />
+                        </div>
+                    </div>
+
+                    <div class="policy-text">
+                        People who use our service may have uploaded your contact information to Facebook.
+                        <a href="#">Learn more.</a>
+                    </div>
+
+                    <div class="policy-text" style="margin-top: 0;">
+                        By clicking Sign Up, you agree to our
+                        <a href="#">Terms</a>, <a href="#">Privacy Policy</a> and <a href="#">Cookies Policy</a>.
+                        You may receive SMS notifications from us and can opt out at any time.
+                    </div>
+
+                    <button type="submit" class="signup-submit-btn">Sign Up</button>
+
+                    <p class="text-center text-sm mt-3">
+                        <a href="#" class="text-blue-600 hover:underline" onclick="goToLoginPage()">Already have an
+                            account?</a>
+                    </p>
+                </div>
+            </form>
+            <p id="message"></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="page-footer">
+        <div class="footer-content">
+            <div class="language-links">
+                <a href="#" class="active-lang">English (UK)</a>
+                <a href="#">हिन्दी</a>
+                <a href="#">اردو</a>
+                <a href="#">ਪੰਜਾਬੀ</a>
+                <a href="#">বাংলা</a>
+                <a href="#">मराठी</a>
+                <a href="#">ગુજરાતી</a>
+                <a href="#">ಕನ್ನಡ</a>
+                <a href="#">తెలుగు</a>
+                <a href="#">தமிழ்</a>
+                <a href="#">മലയാളം</a>
+                <button class="plus">+</button>
+            </div>
+
+            <div class="meta-links">
+                <a href="#">Sign Up</a>
+                <a href="#">Log In</a>
+                <a href="#">Messenger</a>
+                <a href="#">M.N.K Lite</a>
+                <a href="#">Video</a>
+                <a href="#">Places</a>
+                <a href="#">Games</a>
+                <a href="#">Marketplace</a>
+                <a href="#">Meta Pay</a>
+                <a href="#">Meta Store</a>
+                <a href="#">Meta Quest</a>
+                <a href="#">Meta AI</a>
+                <a href="#">Meta AI at Work</a>
+                <a href="#">Careers</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Cookies</a>
+                <a href="#">AdChoices</a>
+                <a href="#">Terms</a>
+                <a href="#">Help</a>
+                <a href="#">Contact uploading and non-users</a>
+            </div>
+
+            <div class="copyright">Meta © 2025</div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        
+        // Check for saved theme preference or default to light
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        
+        // Update icon based on current theme
+        if (currentTheme === 'dark') {
+            themeIcon.textContent = '☀️';
+        } else {
+            themeIcon.textContent = '🌙';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update icon
+            if (newTheme === 'dark') {
+                themeIcon.textContent = '☀️';
+            } else {
+                themeIcon.textContent = '🌙';
+            }
+        });
+    </script>
+</body>
+
+</html>

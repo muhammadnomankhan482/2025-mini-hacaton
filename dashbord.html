@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>M.N.K - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <link rel="stylesheet" href="dashbord.css" />
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-container">
+      <!-- Logo and Search -->
+      <div class="nav-left">
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="logo">M.N.K</div>
+        <div class="search-container">
+          <i class="fa-solid fa-search search-icon"></i>
+          <input type="text" placeholder="Search posts..." class="search-input" id="searchInput" />
+        </div>
+      </div>
+
+      <!-- Center Icons -->
+      <div class="nav-center">
+        <a href="dashbord.html" class="nav-icon">
+          <i class="fa-solid fa-house"></i>
+        </a>
+        <div class="notification-icon" onclick="toggleNotifications()">
+          <i class="fa-solid fa-bell"></i>
+          <span class="notification-badge hidden" id="notificationBadge">0</span>
+        </div>
+        <button class="theme-btn" onclick="toggleTheme()">
+          <i class="fa-solid fa-moon" id="themeIcon"></i>
+        </button>
+      </div>
+
+      <!-- Profile -->
+      <div class="nav-profile" onclick="openProfilePopup()">
+        <img src="profile.jpg" alt="Profile" class="nav-profile-pic" id="navProfilePic">
+        <span class="nav-user-name" id="navUserName">M.N.K</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Notifications Popup -->
+  <div class="notifications-popup hidden" id="notificationsPopup">
+    <div class="notifications-header">
+      <h3>Notifications</h3>
+      <span class="close-btn" onclick="toggleNotifications()">&times;</span>
+    </div>
+    <div class="notifications-content" id="notificationsList">
+      <!-- Notifications will be loaded here -->
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+    <div class="main-layout">
+      <!-- Left Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-card">
+          <ul class="sidebar-menu">
+            <li class="sidebar-item" onclick="openEditProfile()">
+              <i class="fa-solid fa-user"></i>
+              <span>Profile</span>
+            </li>
+            <li class="sidebar-item">
+              <a href="#" class="sidebar-link">
+                <i class="fa-solid fa-users"></i>
+                <span>Friends</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a href="#" class="sidebar-link">
+                <i class="fa-solid fa-bookmark"></i>
+                <span>Saved Posts</span>
+              </a>
+            </li>
+            <li class="sidebar-item" onclick="logout()">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              <span>Logout</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Sort Controls -->
+        <div class="sort-card">
+          <h3 class="sort-title">Sort Posts</h3>
+          <div class="sort-options">
+            <button onclick="changeSort('latest')" class="sort-option">
+              <span>Latest First</span>
+              <i class="fa-solid fa-check sort-check hidden" id="check-latest"></i>
+            </button>
+            <button onclick="changeSort('oldest')" class="sort-option">
+              <span>Oldest First</span>
+              <i class="fa-solid fa-check sort-check hidden" id="check-oldest"></i>
+            </button>
+            <button onclick="changeSort('most_liked')" class="sort-option">
+              <span>Most Liked</span>
+              <i class="fa-solid fa-check sort-check hidden" id="check-most_liked"></i>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <div class="content-area">
+          <!-- Create Post -->
+          <div class="create-post-card">
+            <div class="post-creator">
+              <img src="profile.jpg" alt="Profile" id="createPostProfilePic" class="creator-profile-pic">
+              <input type="text" placeholder="What's on your mind?" id="post-content" class="post-input">
+              <button onclick="handlePost()" class="post-btn">Post</button>
+            </div>
+
+            <!-- Image Upload Section -->
+            <div class="image-upload-section hidden">
+              <div class="upload-buttons">
+                <input type="file" id="postImage" accept="image/*" class="hidden">
+                <button type="button" onclick="document.getElementById('postImage').click()" class="upload-btn image-upload">
+                  <i class="fa-solid fa-image"></i> Upload Image
+                </button>
+                
+                <button type="button" onclick="openImageUrlModal()" class="upload-btn image-url">
+                  <i class="fa-solid fa-link"></i> Add Image URL
+                </button>
+              </div>
+              <div id="imagePreview" class="image-preview"></div>
+            </div>
+
+            <div class="post-actions">
+              <button type="button" onclick="toggleImageUpload()" class="post-action-btn">
+                <i class="fa-solid fa-image"></i>
+                <span>Photo</span>
+              </button>
+              <button type="button" onclick="openEmojiPicker()" class="post-action-btn">
+                <i class="fa-regular fa-face-smile"></i>
+                <span>Emoji</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Search Results -->
+          <div class="search-results-card hidden" id="searchResults">
+            <div class="search-results-header">
+              <h3>Search Results</h3>
+            </div>
+            <div id="searchResultsContent" class="search-results-content">
+              <!-- Search results will be loaded here -->
+            </div>
+          </div>
+
+          <!-- Post Section -->
+          <div id="post-section" class="posts-feed">
+            <!-- Posts will be loaded here by JavaScript -->
+          </div>
+
+          <!-- Load More Button -->
+          <div class="load-more-container">
+            <button id="loadMoreBtn" onclick="loadMorePosts()" class="load-more-btn hidden">Load More Posts</button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Profile Popup -->
+  <div id="userProfilePopup" class="profile-popup hidden">
+    <div class="popup-overlay">
+      <div class="popup-card">
+        <span class="popup-close" id="closeProfile">&times;</span>
+        <div class="profile-popup-content">
+          <img src="profile.jpg" alt="Profile" id="popupProfilePic" class="popup-profile-img">
+          <h2 id="popupName">User Name</h2>
+          <p id="popupEmail" class="popup-email">user@email.com</p>
+          <p id="popupBio" class="popup-bio">No bio yet</p>
+
+          <button onclick="openEditProfile()" class="btn btn-primary">
+            <i class="fa-solid fa-edit"></i>
+            <span>Edit Profile</span>
+          </button>
+
+          <button onclick="logout()" class="btn btn-danger">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Log Out</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Profile Popup -->
+  <div id="editProfilePopup" class="profile-popup hidden">
+    <div class="popup-overlay">
+      <div class="popup-card">
+        <span class="popup-close" id="closeEditProfile">&times;</span>
+        <h2 class="popup-title">Edit Profile</h2>
+
+        <div class="edit-profile-pic-section">
+          <img src="profile.jpg" alt="Profile" id="editProfilePic" class="edit-profile-img">
+          <input type="file" id="profilePictureInput" accept="image/*" class="hidden">
+          <button onclick="document.getElementById('profilePictureInput').click()" class="btn btn-secondary">
+            Change Photo
+          </button>
+        </div>
+
+        <div class="edit-form">
+          <input type="text" id="editFirstName" placeholder="First Name" class="form-input">
+          <input type="text" id="editSureName" placeholder="Surname" class="form-input">
+          <input type="email" id="editEmail" placeholder="Email" class="form-input">
+          <textarea id="editBio" placeholder="Bio..." class="form-textarea"></textarea>
+
+          <button onclick="saveProfile()" class="btn btn-primary save-profile-btn">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="dashbord.js"></script>
+</body>
+
+</html>
